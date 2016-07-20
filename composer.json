@@ -1,0 +1,26 @@
+{
+    "name": "dangreaves/slackbot",
+    "description": "Extensible implementation of an RTM Slack bot",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dan Greaves",
+            "email": "dan@dangreaves.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "coderstephen/slack-client": "^0.2.4",
+        "react/event-loop": "^0.4.2",
+        "nesbot/carbon": "^1.21",
+        "illuminate/support": "^5.2"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "DanGreaves\\SlackBot\\": "src/"
+        }
+    }
+}
