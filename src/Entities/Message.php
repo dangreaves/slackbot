@@ -30,14 +30,74 @@ class Message extends Event
     }
 
     /**
-     * Return whether or not the message contains the given $needle.
+     * Return whether or not the message contains the given needles.
+     *
+     * @param  array|string $needles
+     * @param  string       $operator
+     * @return boolean
+     */
+    public function contains($needles, $operator = 'OR')
+    {
+        if (! is_array($needles)) {
+            return $this->textContains($needles);
+        }
+
+        $matchCount = 0;
+
+        foreach ($needles as $needle) {
+
+            if ($this->textContains($needle)) {
+                $matchCount++;
+
+                if ('OR' == $operator) {
+                    break;
+                }
+            }
+
+        }
+
+        if ('OR' == $operator && 0 < $matchCount) {
+            return true;
+        }
+
+        if ('AND' == $operator && $matchCount == count($needles)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Returnt true if the message text contains ALL the given needles.
+     *
+     * @param  array $needles
+     * @return boolean
+     */
+    public function containsAll($needles)
+    {
+        return $this->contains($needles, 'AND');
+    }
+
+    /**
+     * Returnt true if the message text contains ANY of the given needles.
+     *
+     * @param  array $needles
+     * @return boolean
+     */
+    public function containsAny($needles)
+    {
+        return $this->contains($needles, 'OR');
+    }
+
+    /**
+     * Return whether or not the message text contains the given $needle.
      *
      * Case-insensitive.
      *
-     * @param  string $needle
+     * @param  array|string $needle
      * @return boolean
      */
-    public function contains($needle)
+    public function textContains($needle)
     {
         return false !== strpos(
             strtolower($this->text),
