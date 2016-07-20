@@ -151,7 +151,7 @@ class SlackBot
     /**
      * Locate and execute a relevant reaction.
      *
-     * @param  Larachat\Larabot\Entities\Message $message
+     * @param  DanGreaves\SlackBot\Entities\Message $message
      * @return void
      */
     protected function react(Message $message)
