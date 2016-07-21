@@ -26,7 +26,7 @@ class SlackBotCommand extends Command
      *
      * @var DanGreaves\SlackBot\SlackBot
      */
-    protected $drip;
+    protected $bot;
 
     /**
      * Create a new command instance.
